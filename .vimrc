@@ -96,7 +96,7 @@ let g:UltiSnipaSnippetDirectories=["~/.vim/UltiSnips"]
 "----------------------------------------------------------------------------------------------------
 filetype off
 call pathogen#helptags()
-execute pathogen#infect('bundle/{}')
+execute pathogen#infect('~/.vim/bundle/{}')
 filetype plugin indent on
 
 "----------------------------------------------------------------------------------------------------
@@ -110,11 +110,10 @@ autocmd BufWinEnter * silent loadview
 "----------------------------------------------------------------------------------------------------
 
 set langmap=йцукенгшщзфывапролдячсмитьЙЦУКЕНГШЩЗФЫВАПРОЛДЯЧСМИТЬ;qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM
-"not worckin
 set keymap=russian-jcukenwin
 set iminsert=0
 set imsearch=0
-"highlight lCursor ctermfg=cyan
+highlight lCursor ctermfg=cyan
 
 
 "----------------------------------------------------------------------------------------------------
@@ -122,3 +121,9 @@ set imsearch=0
 "----------------------------------------------------------------------------------------------------
 set termguicolors
 colorscheme angr
+
+
+"----------------------------------------------------------------------------------------------------
+"changes plugin
+"----------------------------------------------------------------------------------------------------
+let g:changes_autocmd=0
