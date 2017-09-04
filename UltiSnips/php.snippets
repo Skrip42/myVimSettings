@@ -1,0 +1,182 @@
+snippet req "require" b
+require('$1');
+endsnippet
+
+snippet req "require_once" b
+require_once('$1');
+endsnippet
+
+snippet req "include" b
+include '$1';
+endsnippet
+
+snippet req "include" b
+include_once '$1';
+endsnippet
+
+snippet function "function and comment" b
+/*	${2:null} function $1($3); / $4*/
+function $1 (${3/(int\s)|(bool\s)|(string\s)|(float\s)|(array\s)|(object\s)|(resource\s)|(mixed\s)|(callback\s)//g}) {
+	$5
+}
+endsnippet
+
+snippet foreach "foreach" b
+foreach($1 as ${2:$key} => ${3:$value}){
+	$4
+};
+endsnippet
+
+snippet echo "echo" b
+echo "$1";
+endsnippet
+
+snippet "addClass\s(\w+)" "create new class" r
+include `!p 
+snip.rv = match.group(1) + '.php'
+import os
+if not os.path.exists(match.group(1) + '.php'):
+	os.mknod(match.group(1) + '.php')
+	f = open(match.group(1) + '.php', 'w')
+	f.write('<?php\n')
+	f.write('class ' + match.group(1) + '{\n')
+	f.write('}\n')
+	f.write('?>')
+	f.close()
+`
+endsnippet
+
+
+
+
+
+snippet ! "html tags and html layout" b
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+		<title>$1</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<script src = "main.js"></script>
+	</body>
+</html>
+endsnippet
+
+snippet form "base form" b
+<form action="$1" method="post">
+	$2
+	<p><input type="submit"></p>
+</form>
+endsnippet
+
+snippet div "div tag" b 
+<div $1>
+	$2
+</div>
+endsnippet
+
+snippet php "php include tag" b
+<?php
+	$1
+?>
+endsnippet
+
+snippet php "php inline" i
+<?=$1?>
+endsnippet
+
+snippet link "css link" b
+<link rel="${2:stylesheet}" href="$1">
+endsnippet
+
+snippet link "link script file" b
+<script type = "text/javascript" src = "$1"></script>
+endsnippet
+
+snippet script "inline script" b
+<script type = "text/javascript">
+	$1
+</script>
+endsnippet
+
+snippet p "p tag" i
+<p>$1</p>
+endsnippet
+
+snippet ul "ul tag" i
+<ul>$1</ul>
+endsnippet
+
+snippet li "li tag" i
+<li>$1</li>
+endsnippet
+
+snippet input "input tag" i
+<input type = "${1:text}" value = "$2" name = "$3">
+endsnippet
+
+snippet textarea "textarea tag" i
+<textarea value = "$1" name = "$2">
+endsnippet
+	
+
+snippet select "select tag" b
+<select $1>
+	<option value = "$2">$3</option>
+</select>
+endsnippet
+
+snippet img "image" b
+<img src = "$1" width = "$2" height = "$3" alt = "${4:image}">
+endsnippet
+
+snippet svg "inline svg element"
+<svg viewBox = "0 0 50 50"
+$1
+</svg>
+endsnippet
+
+
+
+snippet googlefonts "import google fonts to doc" b
+<link href="https://fonts.googleapis.com/css?family=$1" rel="stylesheet">
+endsnippet
+
+snippet googleIcons "inport google material icons"
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+endsnippet
+
+snippet gIcon "description" i
+<i class="material-icons">$1</i>
+endsnippet
+	
+	
+
+
+
+snippet id "id in the tag"
+id = "$1"
+endsnippet
+
+snippet class "class in the tag"
+class = "$1"
+endsnippet
+
+snippet // "php comment" i
+/* $1 /`!p 
+import getpass
+from datetime import datetime
+snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+`*/
+endsnippet
+
+snippet // "html comment" i
+<!-- $1 /`!p 
+import getpass
+from datetime import datetime
+snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+`-->
+endsnippet

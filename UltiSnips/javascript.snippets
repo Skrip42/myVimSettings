@@ -1,0 +1,83 @@
+global !p
+def complete(t, opts):
+	if t:
+		opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+	if len(opts) == 1:
+		return opts[0]
+	return "(" + '|'.join(opts) + ')'
+endglobal
+
+snippet ! "create layout to js file" b
+"use strict";
+
+
+document.addEventListener("DOMContentLoaded", function(){
+	$1
+})
+endsnippet
+
+snippet # "getElementById" i
+document.getElementById('$1')$2;
+endsnippet
+
+snippet . "getElementsByClass" i
+document.getElementsByClass('$1')$2;
+endsnippet
+
+snippet class "classList" i
+classList.$1`!p snip.rv=complete(t[1], ['add','remove','contains'])`(${2:'$3'});
+endsnippet
+
+#snippet cm "addClass" i
+#classList.add('$1');
+#endsnippet
+
+#snippet cm "removeClass" i
+#classList.remove('$1');
+#endsnippet
+
+#snippet cm "checkClass" i
+#classList.contains('$1');
+#endsnippet
+
+
+
+snippet event "addEventListener" i
+addEventListener('$1', ${2:function (event) {$3}})$4
+endsnippet
+	
+snippet function "function and comment" b
+/*	${2:null} function $1($3) / $4 */
+function $1(${3/(int\s)|(bool\s)|(string\s)|(float\s)|(str\s)|(mix\s)|(element\s)|(object\s)|(array\s)|(function\s)//g}) {
+	$5
+};
+endsnippet
+
+snippet function "in object function and comment" b
+/*	${2:null} function $1($3) / $4*/
+$1 : function (${3/(int\s)|(bool\s)|(string\s)|(float\s)|(str\s)|(mix\s)|(element\s)|(object\s)|(array\s)|(function\s)//g}) {
+	$5
+},
+endsnippet
+
+snippet object "global object and coment" b
+/*object $1 / $2 */
+var $1 = {
+	$3
+};
+endsnippet
+
+snippet object "in object object and coment" b
+/*object $1 / $2 */
+$1 : {
+	$3
+},
+endsnippet
+
+snippet // "comment" i
+/* $1 /`!p 
+import getpass
+from datetime import datetime
+snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+`*/
+endsnippet
