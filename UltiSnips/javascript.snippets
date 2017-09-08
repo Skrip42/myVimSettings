@@ -11,7 +11,7 @@ snippet ! "create layout to js file" b
 "use strict";
 
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
 	$1
 })
 endsnippet
@@ -45,34 +45,60 @@ endsnippet
 snippet event "addEventListener" i
 addEventListener('$1', ${2:function (event) {$3}})$4
 endsnippet
-	
-snippet function "function and comment" b
-/*	${2:null} function $1($3) / $4 */
-function $1(${3/(int\s)|(bool\s)|(string\s)|(float\s)|(str\s)|(mix\s)|(element\s)|(object\s)|(array\s)|(function\s)//g}) {
-	$5
-};
+
+snippet "(^(\s*)(var|)\s*)(this.|)([.\w]+) (=|:)\s*" "object" r
+`!p snip.rv = match.group(2)`/* object : `!p snip.rv = match.group(5)` / $1 {{{*/
+`!p snip.rv = match.group(1) + match.group(4) + match.group(5) + ' ' + match.group(6)` {
+$2
+`!p 
+if match.group(6) == ':':
+	snip.rv = match.group(2)+'},'
+else:
+	snip.rv = match.group(2)+'};'
+`
+`!p snip.rv = match.group(2)`/*`!p snip.rv = match.group(5)` end }}}*/
 endsnippet
 
-snippet function "in object function and comment" b
-/*	${2:null} function $1($3) / $4*/
-$1 : function (${3/(int\s)|(bool\s)|(string\s)|(float\s)|(str\s)|(mix\s)|(element\s)|(object\s)|(array\s)|(function\s)//g}) {
-	$5
-},
+snippet "(^(\s*)(var|)\s*)(this.|)([.\w]+) (=|:)\s*(function\s*|)" "function" r
+`!p snip.rv = match.group(2)`/* ${2:null} function `!p snip.rv = match.group(5)` ($3) / $4 {{{*/
+`!p snip.rv = match.group(1) + match.group(4) + match.group(5) + ' ' + match.group(6)` function (${3/(int\s)|(bool\s)|(float\s)|(str\s)|(mix\s)|(dom\s)|(obj\s)|(array\s)|(fun\s)|(\[)|(\])//g}) {
+$5
+`!p 
+if match.group(6) == ':':
+	snip.rv = match.group(2)+'},'
+else:
+	snip.rv = match.group(2)+'};'
+`
+`!p snip.rv = match.group(2)`/*`!p snip.rv = match.group(5)` end }}}*/
 endsnippet
 
-snippet object "global object and coment" b
-/*object $1 / $2 */
-var $1 = {
-	$3
-};
-endsnippet
+#snippet function "function and comment" b
+#/*	${2:null} function $1($3) / $4 */
+#function $1(${3/(int\s)|(bool\s)|(float\s)|(str\s)|(mix\s)|(dom\s)|(obj\s)|(array\s)|(fun\s)|(\[)|(\])//g}) {
+#	$5
+#};
+#endsnippet
 
-snippet object "in object object and coment" b
-/*object $1 / $2 */
-$1 : {
-	$3
-},
-endsnippet
+#snippet function "in object function and comment" b 
+#/*	${2:null} function $1($3) / $4*/
+#$1 : function (${3/(int\s)|(bool\s)|(string\s)|(float\s)|(str\s)|(mix\s)|(element\s)|(object\s)|(array\s)|(function\s)//g}) {
+#	$5
+#},
+#endsnippet
+
+#snippet object "global object and coment" b
+#/*object $1 / $2 */
+#var $1 = {
+#	$3
+#};
+#endsnippet
+
+#snippet object "in object object and coment" b
+#/*object $1 / $2 */
+#$1 : {
+#	$3
+#},
+#endsnippet
 
 snippet // "comment" i
 /* $1 /`!p 

@@ -51,10 +51,14 @@ syntax on
 "foldings
 "----------------------------------------------------------------------------------------------------
 set foldenable
-set foldmethod=syntax
+set foldmethod=marker
 set foldcolumn=3
 set foldlevel=5
+"set foldopen=mark,quickfix,search,tag,undo
 let php_folding=2
+
+autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
+autocmd InsertLeave * let &l:foldmethod=w:last_fdm
 
 "----------------------------------------------------------------------------------------------------
 "ofsets
@@ -81,6 +85,14 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 "----------------------------------------------------------------------------------------------------
+"pathogen
+"----------------------------------------------------------------------------------------------------
+filetype off
+call pathogen#helptags()
+execute pathogen#infect('~/.vim/bundle/{}')
+filetype plugin indent on
+
+"----------------------------------------------------------------------------------------------------
 "ultisnips
 "----------------------------------------------------------------------------------------------------
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -90,14 +102,6 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 "let g:UltiSnipsEditSplit="vertical"
 set runtimepath+=~/.vim/UltiSnips
 let g:UltiSnipaSnippetDirectories=["~/.vim/UltiSnips"]
-
-"----------------------------------------------------------------------------------------------------
-"pathogen
-"----------------------------------------------------------------------------------------------------
-filetype off
-call pathogen#helptags()
-execute pathogen#infect('~/.vim/bundle/{}')
-filetype plugin indent on
 
 "----------------------------------------------------------------------------------------------------
 "autosavefolding
@@ -122,8 +126,12 @@ highlight lCursor ctermfg=cyan
 set termguicolors
 colorscheme angr
 
-
 "----------------------------------------------------------------------------------------------------
 "changes plugin
 "----------------------------------------------------------------------------------------------------
 let g:changes_autocmd=0
+
+"----------------------------------------------------------------------------------------------------
+"tagbar plugin
+"----------------------------------------------------------------------------------------------------
+nmap <F8> : TagbarToggle<CR>
