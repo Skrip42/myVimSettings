@@ -47,7 +47,16 @@ addEventListener('$1', ${2:function (event) {$3}})$4
 endsnippet
 
 snippet "(^(\s*)(var|)\s*)(this.|)([.\w]+) (=|:)\s*" "object" r
-`!p snip.rv = match.group(2)`/* object : `!p snip.rv = match.group(5)` / $1 {{{*/
+`!p
+index = match.group(5).find("Proto")
+if index > -1:
+	stT = match.group(5)[0:index]	
+	st = stT[0].upper() + stT[1:len(stT)]
+	snip.rv = match.group(2) + "/* object : " + st + " prototype"
+else:
+	st = match.group(5)
+	snip.rv = match.group(2) + "/* object : " + st
+` / $1 {{{*/
 `!p snip.rv = match.group(1) + match.group(4) + match.group(5) + ' ' + match.group(6)` {
 $2
 `!p 
@@ -56,7 +65,16 @@ if match.group(6) == ':':
 else:
 	snip.rv = match.group(2)+'};'
 `
-`!p snip.rv = match.group(2)`/*`!p snip.rv = match.group(5)` end }}}*/
+`!p
+index = match.group(5).find("Proto")
+if index > -1:
+	stT = match.group(5)[0:index]	
+	st = stT[0].upper() + stT[1:len(stT)]
+else:
+	st = match.group(5)
+	snip.rv = match.group(2) + "/* object : " + st
+snip.rv = match.group(2) + "/*" + st + " end}}}*/"
+`
 endsnippet
 
 snippet "(^(\s*)(var|)\s*)(this.|)([.\w]+) (=|:)\s*(function\s*|)" "function" r
