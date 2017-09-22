@@ -148,6 +148,7 @@ nmap <F8> :NERDTreeToggle<CR>
 nmap <F10> :6sp \| ConqueTerm bash<CR>
 nmap <F11> :6sp \| ConqueTerm python3<CR>
 nmap <F12> :6sp \| ConqueTerm mysql -u root -p<CR>
+"nmap <F10> :ConqueTermSplit bash<CR>
 set splitbelow
 "----------------------------------------------------------------------------------------------------
 "syntastic plugin
