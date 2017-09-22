@@ -46,6 +46,14 @@ snippet event "addEventListener" i
 addEventListener('$1', ${2:function (event) {$3}})$4
 endsnippet
 
+snippet proto "setPrototype" i
+Object.setPrototypeOf(${1:this}, $2);
+endsnippet
+
+snippet atr "setAttribyte" i
+setAttribute("$1","$2");
+endsnippet
+
 snippet "(^(\s*)(var|)\s*)(this.|)([.\w]+) (=|:)\s*" "object" r
 `!p
 index = match.group(5).find("Proto")
@@ -77,9 +85,10 @@ snip.rv = match.group(2) + "/*" + st + " end}}}*/"
 `
 endsnippet
 
+
 snippet "(^(\s*)(var|)\s*)(this.|)([.\w]+) (=|:)\s*(function\s*|)" "function" r
 `!p snip.rv = match.group(2)`/* ${2:null} function `!p snip.rv = match.group(5)` ($3) / $4 {{{*/
-`!p snip.rv = match.group(1) + match.group(4) + match.group(5) + ' ' + match.group(6)` function (${3/(int\s)|(bool\s)|(float\s)|(str\s)|(mix\s)|(dom\s)|(obj\s)|(array\s)|(fun\s)|(\[)|(\])//g}) {
+`!p snip.rv = match.group(1) + match.group(4) + match.group(5) + ' ' + match.group(6)` function (${3/(byte\s)|(int\s)|(bool\s)|(float\s)|(str\s)|(mix\s)|(dom\s)|(obj\s)|(array\s)|(fun\s)|(\[)|(\])//g}) {
 $5
 `!p 
 if match.group(6) == ':':
