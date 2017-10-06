@@ -1,3 +1,0 @@
-[submodule "changePlugin"]
-      path = bundle/changePlugin 
-      url = https://github.com/chrisbra/changesPlugin.git 
