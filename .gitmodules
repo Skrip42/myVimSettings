@@ -13,3 +13,6 @@
 [submodule "bundle/conque.vim"]
 	path = bundle/conque.vim
 	url = https://github.com/wkentaro/conque.vim
+[submodule "bundle/nerdtree-git-plugin"]
+	path = bundle/nerdtree-git-plugin
+	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
