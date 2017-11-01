@@ -63,21 +63,14 @@ autocmd InsertLeave * let &l:foldmethod=w:last_fdm
 "----------------------------------------------------------------------------------------------------
 "ofsets
 "----------------------------------------------------------------------------------------------------
+set expandtab
 set tabstop=4
 set shiftwidth=4
-set smarttab
-set expandtab
-set smartindent
-set autoindent
+set softtabstop=4
+"set smarttab
+"set smartindent
+"set autoindent
 
-"set showcmd		" Show (partial) command in status line.
-"set showmatch		" Show matching brackets.
-"set ignorecase		" Do case insensitive matching
-"set smartcase		" Do smart case matching
-"set incsearch		" Incremental search
-"set autowrite		" Automatically save before commands like :next and :make
-"set hidden		" Hide buffers when they are abandoned
-"set mouse=a		" Enable mouse usage (all modes)
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -145,9 +138,9 @@ nmap <F8> :NERDTreeToggle<CR>
 "----------------------------------------------------------------------------------------------------
 "ConqueTerm plugin
 "----------------------------------------------------------------------------------------------------
-nmap <F10> :6sp \| ConqueTerm bash<CR>
-nmap <F11> :6sp \| ConqueTerm python3<CR>
-nmap <F12> :6sp \| ConqueTerm mysql -u root -p<CR>
+nmap <F5> :6sp \| ConqueTerm bash<CR>
+nmap <F6> :6sp \| ConqueTerm python3<CR>
+nmap <F7> :6sp \| ConqueTerm mysql -u root -p<CR>
 "nmap <F10> :ConqueTermSplit bash<CR>
 set splitbelow
 "----------------------------------------------------------------------------------------------------
@@ -161,5 +154,7 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+let g:syntastic_php_phpcs_args='--tab-width=0'
 
 set signcolumn=no

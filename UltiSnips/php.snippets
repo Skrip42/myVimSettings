@@ -1,3 +1,7 @@
+#pear fuckin comments
+
+
+#php
 snippet req "require" b
 require('$1');
 endsnippet
@@ -14,42 +18,19 @@ snippet req "include" b
 include_once '$1';
 endsnippet
 
-snippet function "function and comment" b
-/*	${2:null} function $1($3); / $4*/
-function $1 (${3/(int\s)|(bool\s)|(string\s)|(float\s)|(array\s)|(object\s)|(resource\s)|(mixed\s)|(callback\s)//g}) {
-	$5
-}
-endsnippet
-
-snippet foreach "foreach" b
-foreach($1 as ${2:$key} => ${3:$value}){
-	$4
-};
-endsnippet
-
-snippet echo "echo" b
-echo "$1";
-endsnippet
-
-snippet "addClass\s(\w+)" "create new class" r
-include `!p 
-snip.rv = match.group(1) + '.php'
-import os
-if not os.path.exists(match.group(1) + '.php'):
-	os.mknod(match.group(1) + '.php')
-	f = open(match.group(1) + '.php', 'w')
-	f.write('<?php\n')
-	f.write('class ' + match.group(1) + '{\n')
-	f.write('}\n')
-	f.write('?>')
-	f.close()
-`
+snippet // "php comment" i
+/* $1 /`!p 
+import getpass
+from datetime import datetime
+snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+`*/
 endsnippet
 
 
 
 
 
+#html
 snippet ! "html tags and html layout" b
 <!DOCTYPE html>
 <html lang="ru">
@@ -86,6 +67,12 @@ endsnippet
 
 snippet php "php inline" i
 <?=$1?>
+endsnippet
+
+snippet php "php include tag" b
+<?php
+	$1
+?>
 endsnippet
 
 snippet link "css link" b
@@ -141,6 +128,25 @@ endsnippet
 
 
 
+snippet id "id in the tag"
+id = "$1"
+endsnippet
+
+snippet class "class in the tag"
+class = "$1"
+endsnippet
+
+snippet // "html comment" i
+<!-- $1 /`!p 
+import getpass
+from datetime import datetime
+snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+`-->
+endsnippet
+
+
+
+#html includ
 snippet googlefonts "import google fonts to doc" b
 <link href="https://fonts.googleapis.com/css?family=$1" rel="stylesheet">
 endsnippet
@@ -157,26 +163,3 @@ endsnippet
 
 
 
-snippet id "id in the tag"
-id = "$1"
-endsnippet
-
-snippet class "class in the tag"
-class = "$1"
-endsnippet
-
-snippet // "php comment" i
-/* $1 /`!p 
-import getpass
-from datetime import datetime
-snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-`*/
-endsnippet
-
-snippet // "html comment" i
-<!-- $1 /`!p 
-import getpass
-from datetime import datetime
-snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-`-->
-endsnippet
