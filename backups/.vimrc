@@ -41,6 +41,7 @@ endif
 " The following are commented out as they cause vim to behave a lot
 " differently from regular Vi. They are highly recommended though.
 "
+set t_Co=256
 set number
 set incsearch
 set hlsearch
