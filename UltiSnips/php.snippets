@@ -1,17 +1,16 @@
 #pear fuckin comments
 snippet ! "phpDoc comment" b
 /**
-*   ${1:`!p snip.rv = snip.fn` Doc Comment}
-*
-*   PHP version ${2:7}
-*
-*   @category ${2:Class}
-*   @package  $3
-*   @author   ${4:Skrip <skrip42@gmail.com>}
-*   @license  http://www.gnu.org/copyleft/gpl.html CNU General Public License
-*   @link     ${5:http://github.com/Skrip42}
-*
-*/
+ * ${1:`!p snip.rv = snip.fn` Doc Comment}
+ *
+ * PHP version ${2:7}
+ * 
+ * @category ${2:Class}
+ * @package  $3
+ * @author   ${4:Skrip <skrip42@gmail.com>}
+ * @license  http://www.gnu.org/copyleft/gpl.html CNU General Public License
+ * @link     ${5:http://github.com/Skrip42}
+ */
 endsnippet
 
 snippet '(\s*)(function\s(\w+)\(([\w\s$,]*)\)\s?{?)' "function comment" r
