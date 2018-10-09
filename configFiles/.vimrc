@@ -159,3 +159,7 @@ let g:syntastic_check_on_wq = 0
 let g:syntastic_php_phpcs_args='--tab-width=0'
 
 set signcolumn=no
+"----------------------------------------------------------------------------------------------------
+"nerd commenter plugin
+"----------------------------------------------------------------------------------------------------
+map <C-_> <plug>NERDCommenterToggle

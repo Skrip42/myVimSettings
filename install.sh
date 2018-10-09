@@ -11,3 +11,5 @@ apt-get install php-codesniffer
 ln -s ~/.vim/CodeSnifferStandarts/mPEAR /usr/share/php/PHP/CodeSniffer/Standards/
 phpcs -i
 
+apt-get install exuberant-ctags
+
