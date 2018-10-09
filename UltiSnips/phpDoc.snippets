@@ -1,0 +1,50 @@
+#php docblock snippets
+#file docblock comment
+snippet ! "phpDoc comment" b
+/**
+ * ${1:`!p snip.rv = snip.fn` Doc Comment}
+ *
+ * PHP version ${2:7}
+ * 
+ * @category ${2:Class}
+ * @package  $3
+ * @author   ${4:Skrip <skrip42@gmail.com>}
+ * @license  http://www.gnu.org/copyleft/gpl.html CNU General Public License
+ * @link     ${5:http://github.com/Skrip42}
+ */
+endsnippet
+
+snippet '^(\s*)(function\s(\w+)\(([\w\s$,]*)\)\s?{?)' "function comment" r
+`!p snip.rv = match.group(1)`/**
+`!p snip.rv = match.group(1)` * ${1:`!p snip.rv = match.group(3)` function}
+`!p snip.rv = match.group(1)` *
+`!p
+import re
+params = match.group(4).split(',')
+pType = []
+pName = []
+mTLen = 0
+mNLen = 0
+for i in range(0, len(params)):
+	#snip.rv += params[i] 
+	p = re.match('\s*(\w*)\s(\$\w*),?', params[i])
+	t = p.group(1)
+	pType.append(p.group(1))
+	pName.append(p.group(2))
+	if mTLen < len(p.group(1)):
+		mTLen = len(p.group(1))
+	if mNLen < len(p.group(2)):
+		mNLen = len(p.group(2))
+	#snip.rv += len(p.group(1))
+mTLen = mTLen + 1
+for i in range(0, len(pType)):
+	snip.rv += match.group(1) + ' * ' + '@param ' + pType[i] + ' ' * (mTLen - len(pType[i])) + pName[i] + ' ' * (mNLen - len(pName[i])) + ' description'
+	if i != len(pType) - 1:
+		snip.rv += "\n"
+		#snip.rv += "\n"
+` 
+`!p snip.rv = match.group(1)` *
+`!p snip.rv = match.group(1)` * @return ${20:null}
+`!p snip.rv = match.group(1)` */
+`!p snip.rv += match.group(2)`
+endsnippet
