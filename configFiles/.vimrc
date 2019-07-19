@@ -72,6 +72,13 @@ set softtabstop=4
 "set smartindent
 "set autoindent
 
+"----------------------------------------------------------------------------------------------------
+"disabling swapfile
+"----------------------------------------------------------------------------------------------------
+
+set backupdir=/tmp/vim/backup
+set directory=/tmp/vim/swap
+set undodir=/tmp/vim/undo
 
 " Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
@@ -139,9 +146,9 @@ nmap <F8> :NERDTreeToggle<CR>
 "----------------------------------------------------------------------------------------------------
 "ConqueTerm plugin
 "----------------------------------------------------------------------------------------------------
-nmap <F5> :6sp \| ConqueTerm bash<CR>
-nmap <F6> :6sp \| ConqueTerm python3<CR>
-nmap <F7> :6sp \| ConqueTerm mysql -u root -p<CR>
+nmap <F5> :12sp \| ConqueTerm bash<CR>
+nmap <F6> :12sp \| ConqueTerm python3<CR>
+nmap <F7> :12sp \| ConqueTerm mysql -u root -p<CR>
 "nmap <F10> :ConqueTermSplit bash<CR>
 set splitbelow
 "----------------------------------------------------------------------------------------------------
@@ -154,9 +161,11 @@ set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_wq = 1
+"let g:syntastic_mode_map = {'mode':'passive'}
 
 let g:syntastic_php_phpcs_args='--tab-width=0'
+"let g:syntastic_phpcs_disable = 1
 
 set signcolumn=no
 "----------------------------------------------------------------------------------------------------
@@ -168,4 +177,9 @@ map <C-_> <plug>NERDCommenterToggle
 "----------------------------------------------------------------------------------------------------
 nmap <C-n> :bnext<CR>
 nmap <C-p> :bprev<CR>
+"----------------------------------------------------------------------------------------------------
+"nerd commenter plugin
+"----------------------------------------------------------------------------------------------------
+let g:ycm_use_clangd = 0
+
 
