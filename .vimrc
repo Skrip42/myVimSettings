@@ -181,5 +181,12 @@ nmap <C-p> :bprev<CR>
 "YouCompleteMe plugin
 "----------------------------------------------------------------------------------------------------
 let g:ycm_use_clangd = 0
-
-
+"----------------------------------------------------------------------------------------------------
+"ag plugin
+"----------------------------------------------------------------------------------------------------
+set runtimepath^=~/.vim/bundle/ag
+let g:ag_working_path_mode="r"
+let g:ag_lhandler="topleft vopen"
+let g:ag_qhandler="copen 20"
+let g:ag_apply_qmappings=0
+let g:ag_highlight=1
