@@ -142,6 +142,8 @@ nmap <F9> : TagbarToggle<CR>
 "NERDTree plugin
 "----------------------------------------------------------------------------------------------------
 nmap <F8> :NERDTreeToggle<CR>
+autocmd vimeter * NERDTree
+let NERDTreeShowHidden = 1
 
 "----------------------------------------------------------------------------------------------------
 "ConqueTerm plugin
@@ -190,3 +192,6 @@ let g:ag_lhandler="topleft vopen"
 let g:ag_qhandler="copen 20"
 let g:ag_apply_qmappings=0
 let g:ag_highlight=1
+let g:unite_source_grep_default_opts =
+    \ '-i --vimgrep --hidden --ignore ' .
+    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
