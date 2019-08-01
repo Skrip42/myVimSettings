@@ -209,5 +209,6 @@ let g:ag_highlight=1
 let g:ag_prg="ag --column"
 let g:unite_source_grep_default_opts =
     \ '-i --vimgrep --hidden --ignore ' .
-    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr''' .
+    \ ''' --ignore ''.tmp.php'' --ignore ''.min.js'' --ignore ''.min.css'''
 
