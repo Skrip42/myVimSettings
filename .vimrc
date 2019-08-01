@@ -107,8 +107,12 @@ let g:UltiSnipaSnippetDirectories=["~/.vim/UltiSnips"]
 "----------------------------------------------------------------------------------------------------
 "autosave worckflow
 "----------------------------------------------------------------------------------------------------
-autocmd BufWinLeave * mkview
-autocmd BufWinEnter * silent loadview
+augroup AutoSaveFolds
+  set viewoptions=cursor,folds
+  autocmd!
+  au BufWinLeave ?* mkview 1
+  au BufWinEnter ?* silent loadview 1
+augroup END
 
 "----------------------------------------------------------------------------------------------------
 "kirilica
@@ -161,15 +165,21 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
+let g:syntastic_auto_loc_list = 0
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 1
 "let g:syntastic_mode_map = {'mode':'passive'}
 
 let g:syntastic_php_phpcs_args='--tab-width=0'
-"let g:syntastic_phpcs_disable = 1
+"let g:syntastic_php_checkers = ['php'] "uncoment this to disable phpcs and phpmb
+
+nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
+cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
 set signcolumn=no
+
+nmap <F10> :lopen<CR>
+
 "----------------------------------------------------------------------------------------------------
 "nerd commenter plugin
 "----------------------------------------------------------------------------------------------------
