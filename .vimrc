@@ -108,11 +108,13 @@ let g:UltiSnipaSnippetDirectories=["~/.vim/UltiSnips"]
 "autosave worckflow
 "----------------------------------------------------------------------------------------------------
 augroup AutoSaveFolds
-  set viewoptions=cursor,folds
   autocmd!
-  au BufWinLeave ?* mkview 1
-  au BufWinEnter ?* silent loadview 1
-augroup END
+  " view files are about 500 bytes
+  " bufleave but not bufwinleave captures closing 2nd tab
+  " nested is needed by bufwrite* (if triggered via other autocmd)
+  autocmd BufWinLeave,BufLeave,BufWritePost ?* nested silent! mkview!
+  autocmd BufWinEnter ?* silent! loadview
+augroup end
 
 "----------------------------------------------------------------------------------------------------
 "kirilica
@@ -146,8 +148,10 @@ nmap <F9> : TagbarToggle<CR>
 "NERDTree plugin
 "----------------------------------------------------------------------------------------------------
 nmap <F8> :NERDTreeToggle<CR>
-autocmd vimeter * NERDTree
+autocmd vimenter *.php NERDTree
 let NERDTreeShowHidden = 1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"let NERDTreeQuitOnOpen=1   "uncoment this for enable close on open
 
 "----------------------------------------------------------------------------------------------------
 "ConqueTerm plugin
@@ -202,6 +206,8 @@ let g:ag_lhandler="topleft vopen"
 let g:ag_qhandler="copen 20"
 let g:ag_apply_qmappings=0
 let g:ag_highlight=1
+let g:ag_prg="ag --column"
 let g:unite_source_grep_default_opts =
     \ '-i --vimgrep --hidden --ignore ' .
     \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr'''
+
