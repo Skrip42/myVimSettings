@@ -96,14 +96,9 @@ filetype plugin indent on
 "----------------------------------------------------------------------------------------------------
 "ultisnips
 "----------------------------------------------------------------------------------------------------
-"let g:UltiSnipsExpandTrigger="<tab>"
-"let g:UltiSnipsListSnippets="<c-tab>"
-"let g:UltiSnipsJumpForwardTrigger="<c-j>"
-"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-"let g:UltiSnipsEditSplit="vertical"
 set runtimepath+=~/.vim/UltiSnips
 let g:UltiSnipaSnippetDirectories=["~/.vim/UltiSnips"]
 
