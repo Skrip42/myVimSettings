@@ -80,7 +80,7 @@ set backupdir=~/.vimbackup
 set directory=~/.vimswap
 set undodir=~/.vimundo
 
-" Source a global configuration file if available
+ Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
@@ -96,10 +96,13 @@ filetype plugin indent on
 "----------------------------------------------------------------------------------------------------
 "ultisnips
 "----------------------------------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsListSnippets="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsListSnippets="<c-tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 "let g:UltiSnipsEditSplit="vertical"
 set runtimepath+=~/.vim/UltiSnips
 let g:UltiSnipaSnippetDirectories=["~/.vim/UltiSnips"]
@@ -151,7 +154,7 @@ nmap <F8> :NERDTreeToggle<CR>
 autocmd vimenter *.php NERDTree
 let NERDTreeShowHidden = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"let NERDTreeQuitOnOpen=1   "uncoment this for enable close on open
+let NERDTreeQuitOnOpen=1   "uncoment this for enable close on open
 
 "----------------------------------------------------------------------------------------------------
 "ConqueTerm plugin
@@ -197,6 +200,9 @@ nmap <C-p> :bprev<CR>
 "YouCompleteMe plugin
 "----------------------------------------------------------------------------------------------------
 let g:ycm_use_clangd = 0
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
 "----------------------------------------------------------------------------------------------------
 "ag plugin
 "----------------------------------------------------------------------------------------------------
