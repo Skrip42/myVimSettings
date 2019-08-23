@@ -10,9 +10,6 @@
 [submodule "bundle/ultisnips"]
 	path = bundle/ultisnips
 	url = https://github.com/SirVer/ultisnips.git
-[submodule "bundle/conque.vim"]
-	path = bundle/conque.vim
-	url = https://github.com/wkentaro/conque.vim
 [submodule "bundle/nerdtree-git-plugin"]
 	path = bundle/nerdtree-git-plugin
 	url = https://github.com/Xuyuanp/nerdtree-git-plugin.git
@@ -34,6 +31,3 @@
 [submodule "bundle/vim-tmux-navigator"]
 	path = bundle/vim-tmux-navigator
 	url = https://github.com/christoomey/vim-tmux-navigator.git
-[submodule "bundle/ag.vim"]
-	path = bundle/ag.vim
-	url = https://github.com/rking/ag.vim.git

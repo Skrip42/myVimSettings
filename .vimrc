@@ -1,52 +1,24 @@
-" All system-wide defaults are set in $VIMRUNTIME/debian.vim and sourced by
-" the call to :runtime you can find below.  If you wish to change any of those
-" settings, you should do it in this file (/etc/vim/vimrc), since debian.vim
-" will be overwritten everytime an upgrade of the vim packages is performed.
-" It is recommended to make changes after sourcing debian.vim since it alters
-" the value of the 'compatible' option.
-
 " This line should not be removed as it ensures that various options are
 " properly set to work with the Vim-related packages available in Debian.
 runtime! debian.vim
 
-
-
-" Uncomment the next line to make Vim more Vi-compatible
-" NOTE: debian.vim sets 'nocompatible'.  Setting 'compatible' changes numerous
-" options, so any other options should be set AFTER setting 'compatible'.
-"set compatible
-
-" Vim5 and later versions support syntax highlighting. Uncommenting the next
-" line enables syntax highlighting by default.
+"----------------------------------------------------------------------------------------------------
+"syntax
+"----------------------------------------------------------------------------------------------------
 if has("syntax")
   syntax on
 endif
 
-" If using a dark background within the editing area and syntax highlighting
-" turn on this option as well
-"set background=dark
-
-" Uncomment the following to have Vim jump to the last position when
-" reopening a file
-"if has("autocmd")
-"  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-"endif
-
-" Uncomment the following to have Vim load indentation rules and plugins
-" according to the detected filetype.
-"if has("autocmd")
-"  filetype plugin indent on
-"endif
-
-" The following are commented out as they cause vim to behave a lot
-" differently from regular Vi. They are highly recommended though.
-"
+"----------------------------------------------------------------------------------------------------
+"base
+"----------------------------------------------------------------------------------------------------
 "set t_Co=256
 set number
 set incsearch
 set hlsearch
 set termencoding=utf8
 syntax on
+set updatetime=100
 
 "----------------------------------------------------------------------------------------------------
 "foldings
@@ -152,11 +124,12 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 let NERDTreeQuitOnOpen=1   "uncoment this for enable close on open
 
 "----------------------------------------------------------------------------------------------------
-"ConqueTerm plugin
+"ConqueTerm plugin 
+"TODO delete it!
 "----------------------------------------------------------------------------------------------------
-nmap <F5> :12sp \| ConqueTerm bash<CR>
-nmap <F6> :12sp \| ConqueTerm python3<CR>
-nmap <F7> :12sp \| ConqueTerm mysql -u root -p<CR>
+"nmap <F5> :12sp \| ConqueTerm bash<CR>
+"nmap <F6> :12sp \| ConqueTerm python3<CR>
+"nmap <F7> :12sp \| ConqueTerm mysql -u root -p<CR>
 "nmap <F10> :ConqueTermSplit bash<CR>
 set splitbelow
 "----------------------------------------------------------------------------------------------------
@@ -179,8 +152,8 @@ nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
 set signcolumn=no
-
-nmap <F10> :lopen<CR>
+"open the syntastic bar
+nmap <F10> :lopen<CR> 
 
 "----------------------------------------------------------------------------------------------------
 "nerd commenter plugin
@@ -198,18 +171,17 @@ let g:ycm_use_clangd = 0
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
 let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
 let g:SuperTabDefaultCompletionType = '<C-n>'
-"----------------------------------------------------------------------------------------------------
-"ag plugin
-"----------------------------------------------------------------------------------------------------
-set runtimepath^=~/.vim/bundle/ag
-let g:ag_working_path_mode="r"
-let g:ag_lhandler="topleft vopen"
-let g:ag_qhandler="copen 20"
-let g:ag_apply_qmappings=0
-let g:ag_highlight=1
-let g:ag_prg="ag --column"
-let g:unite_source_grep_default_opts =
-    \ '-i --vimgrep --hidden --ignore ' .
-    \ '''.hg'' --ignore ''.svn'' --ignore ''.git'' --ignore ''.bzr''' .
-    \ ''' --ignore ''.tmp.php'' --ignore ''.min.js'' --ignore ''.min.css'''
 
+"----------------------------------------------------------------------------------------------------
+"toggle lest status
+"----------------------------------------------------------------------------------------------------
+function! LeftStatusToggle()
+    :set invfoldenable
+    :set invnumber
+endfunction
+
+nmap <F12> :call LeftStatusToggle()<CR>
+
+"----------------------------------------------------------------------------------------------------
+"gitgutter plugin
+"----------------------------------------------------------------------------------------------------
