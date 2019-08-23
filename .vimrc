@@ -19,6 +19,7 @@ set hlsearch
 set termencoding=utf8
 syntax on
 set updatetime=100
+"set scl=yes
 
 "----------------------------------------------------------------------------------------------------
 "foldings
@@ -113,7 +114,6 @@ let g:changes_autocmd=0
 "----------------------------------------------------------------------------------------------------
 nmap <F9> : TagbarToggle<CR>
 
-
 "----------------------------------------------------------------------------------------------------
 "NERDTree plugin
 "----------------------------------------------------------------------------------------------------
@@ -123,15 +123,6 @@ let NERDTreeShowHidden = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeQuitOnOpen=1   "uncoment this for enable close on open
 
-"----------------------------------------------------------------------------------------------------
-"ConqueTerm plugin 
-"TODO delete it!
-"----------------------------------------------------------------------------------------------------
-"nmap <F5> :12sp \| ConqueTerm bash<CR>
-"nmap <F6> :12sp \| ConqueTerm python3<CR>
-"nmap <F7> :12sp \| ConqueTerm mysql -u root -p<CR>
-"nmap <F10> :ConqueTermSplit bash<CR>
-set splitbelow
 "----------------------------------------------------------------------------------------------------
 "syntastic plugin
 "----------------------------------------------------------------------------------------------------
@@ -151,7 +142,7 @@ let g:syntastic_php_phpcs_args='--tab-width=0'
 nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>
 cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdelete' : 'bd')<CR>
 
-set signcolumn=no
+"set signcolumn=no
 "open the syntastic bar
 nmap <F10> :lopen<CR> 
 
@@ -178,10 +169,12 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 function! LeftStatusToggle()
     :set invfoldenable
     :set invnumber
+    :SignifyToggle
 endfunction
 
 nmap <F12> :call LeftStatusToggle()<CR>
 
 "----------------------------------------------------------------------------------------------------
-"gitgutter plugin
+"signify plugin
 "----------------------------------------------------------------------------------------------------
+let g:signify_vcs_list = [ 'git', 'hg' ] 
