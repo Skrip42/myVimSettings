@@ -1,0 +1,197 @@
+global !p
+def complete(t, opts):
+	if t:
+		opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+	if len(opts) == 1:
+		return opts[0]
+	return "(" + '|'.join(opts) + ')'
+endglobal
+
+#html
+snippet ! "html tags and html layout" b
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+		<title>$1</title>
+		<link rel="stylesheet" href="style.css">
+	</head>
+	<body>
+		<script src = "main.js"></script>
+	</body>
+</html>
+endsnippet
+
+snippet form "base form" b
+<form action="$1" method="post">
+	$2
+	<p><input type="submit"></p>
+</form>
+endsnippet
+
+snippet div "div tag" b 
+<div $1>
+	$2
+</div>
+endsnippet
+
+snippet php "php include tag" b
+<?php
+	$1
+?>
+endsnippet
+
+snippet php "php inline" i
+<?=$1?>
+endsnippet
+
+snippet link "css link" b
+<link rel="${2:stylesheet}" href="$1">
+endsnippet
+
+snippet script "inline script" b
+<script type = "text/javascript">
+	$1
+</script>
+endsnippet
+
+snippet span "span tag" i
+<span>$1</span>
+endsnippet
+
+snippet p "p tag" i
+<p>$1</p>
+endsnippet
+
+snippet ul "ul tag" i
+<ul>$1</ul>
+endsnippet
+
+snippet li "li tag" i
+<li>$1</li>
+endsnippet
+
+snippet a "href tag" i
+<a href="$1">$2</a>
+endsnippet
+
+snippet h "h Tag" i
+<h$1>$2</h$1>
+endsnippet
+
+snippet input "input tag" i
+<input type = "${1:text}" value = "$2" name = "$3">
+endsnippet
+
+snippet button "button tag" i
+<button name="$1">$2</button>
+endsnippet
+
+snippet textarea "textarea tag" i
+<textarea value = "$1" name = "$2">
+endsnippet
+	
+snippet select "select tag" b
+<select $1>
+	<option value = "$2">$3</option>
+</select>
+endsnippet
+
+snippet img "image" b
+<img src = "$1" width = "$2" height = "$3" alt = "${4:image}">
+endsnippet
+
+snippet svg "inline svg element" b
+<svg viewBox = "0 0 50 50"
+$1
+</svg>
+endsnippet
+
+snippet detail "details element" b
+<details>
+	<summary>$1</summary>
+	$2
+</details>
+endsnippet
+
+snippet canvas "canvas element" b
+<canvas id="$1" width="${2:300}" height="${3:300}"></canvas>
+endsnippet
+
+snippet form "form element" b
+<form action="$1" method="${2:post}">
+</form>
+endsnippet
+
+snippet label "label element" i
+<label for="$1">$2</label>
+endsnippet
+
+snippet table "table element" b
+<table>
+	<thead>
+		$1
+	</thead>
+	<tbody>
+		$2
+	</tbody>
+</table>
+endsnippet
+
+snippet tr "tr element" i
+<tr>$1</tr>
+endsnippet
+
+snippet th "tr element" i
+<th>$1</th>
+endsnippet
+
+snippet td "tr element" i
+<td>$1</td>
+endsnippet
+
+#subsnippet
+snippet # "id in the tag"
+id="$1"
+endsnippet
+
+snippet . "class in the tag"
+class="$1"
+endsnippet
+
+snippet data "data in the tag"
+data-$1="$2"
+endsnippet
+
+
+snippet type "type in the tab"
+type="$1`!p snip.rv=complete(t[1], ['text','checkbox','button','hidden','file','image','password','radio','reset','submit','color','date','datetime','datetime-local','email','number','range','search','tel','time','url','month','week'])`"
+endsnippet
+
+snippet // "html comment" i
+<!-- $1 /`!p 
+import getpass
+from datetime import datetime
+snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+`-->
+endsnippet
+
+
+#html includ
+snippet googlefonts "import google fonts to doc" b
+<link href="https://fonts.googleapis.com/css?family=$1" rel="stylesheet">
+endsnippet
+
+snippet googleIcons "inport google material icons"
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+endsnippet
+
+snippet gIcon "description" i
+<i class="material-icons">$1</i>
+endsnippet
+	
+	
+
+
+

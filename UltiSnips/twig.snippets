@@ -1,0 +1,42 @@
+extends html
+
+snippet for "for element" b
+{% for $1 in $2 %}
+{% endfor %}
+endsnippet
+
+snippet extends "extends snippet"
+{% extends "$1" %}
+endsnippet
+
+snippet use "use snippet"
+{% use "$1" %}
+endsnippet
+
+snippet block "block snippet"
+{% block $1 %}$2{% endblock %}
+endsnippet
+
+snippet if "if symply snippet"
+{% if $1 %}
+	$2
+{% endif %}
+endsnippet
+
+snippet if "if else snippet"
+{% if $1 %}
+	$2
+{% else %}
+	$3
+{% endif %}
+endsnippet
+
+snippet if "if elseif snippet"
+{% if $1 %}
+	$3
+{% elseif $2 %}
+	$4
+{% else %}
+	$5
+{% endif %}
+endsnippet

@@ -10,7 +10,6 @@ endglobal
 snippet ! "create layout to js file" b
 "use strict";
 
-
 document.addEventListener("DOMContentLoaded", function () {
 	$1
 })
@@ -21,28 +20,22 @@ document.getElementById('$1')$2;
 endsnippet
 
 snippet . "getElementsByClass" i
-document.getElementsByClass('$1')$2;
+document.getElementsByClassName('$1')$2;
 endsnippet
 
 snippet class "classList" i
 classList.$1`!p snip.rv=complete(t[1], ['add','remove','contains'])`(${2:'$3'});
 endsnippet
 
-#snippet cm "addClass" i
-#classList.add('$1');
-#endsnippet
-
-#snippet cm "removeClass" i
-#classList.remove('$1');
-#endsnippet
-
-#snippet cm "checkClass" i
-#classList.contains('$1');
-#endsnippet
-
-
+snippet cl "classList" i
+classList.$1`!p snip.rv=complete(t[1], ['add','remove','contains'])`(${2:'$3'});
+endsnippet
 
 snippet event "addEventListener" i
+addEventListener('$1', ${2:function (event) {$3}})$4
+endsnippet
+
+snippet ev "addEventListener" i
 addEventListener('$1', ${2:function (event) {$3}})$4
 endsnippet
 
@@ -50,8 +43,12 @@ snippet proto "setPrototype" i
 Object.setPrototypeOf(${1:this}, $2);
 endsnippet
 
-snippet atr "setAttribyte" i
+snippet attr "setAttribute" i
 setAttribute("$1","$2");
+endsnippet
+
+snippet attr "getAttribute" i
+getAttribute("$1");
 endsnippet
 
 snippet "(^(\s*)(var|)\s*)(this.|)([.\w]+) (=|:)\s*" "object" r
@@ -127,10 +124,10 @@ endsnippet
 #},
 #endsnippet
 
-snippet // "comment" i
-/* $1 /`!p 
-import getpass
-from datetime import datetime
-snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
-`*/
-endsnippet
+#snippet // "comment" i
+#/* $1 /`!p 
+#import getpass
+#from datetime import datetime
+#snip.rv = getpass.getuser() + ' ' + datetime.now().strftime('%d-%m-%Y %H:%M:%S')
+#`*/
+#endsnippet

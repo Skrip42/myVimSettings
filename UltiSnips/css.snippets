@@ -1,21 +1,34 @@
-snippet box-shadow "shadow style"
+global !p
+def complete(t, opts):
+	if t:
+		opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+	if len(opts) == 1:
+		return opts[0]
+	return "(" + '|'.join(opts) + ')'
+endglobal
+
+snippet bg "background url"
+background: url($2) $1`!p snip.rv=complete(t[1], ['no-repeat','repeat','repeat-x','repeat-y','inherit','space','round'])`
+endsnippet
+
+snippet bg "background color"
+background: $q
+endsnippet
+
+snippet shadow "shadow style"
 box-shadow: ${1:0}px ${2:0}px ${3:0}px rgba(0,0,0,0.5);
 endsnippet
 
-snippet border "border style"
+snippet border "bor style"
 border: $1px ${2:solid} ${3:black};
 endsnippet
 
-snippet margin "margin"
+snippet margin "mar"
 margin: ${1:0}px ${2:0}px ${3:0}px ${4:0}px;
 endsnippet
 
-snippet padding "padding"
+snippet padding "pad"
 padding: ${1:0}px ${2:0}px ${3:0}px ${4:0}px;
-endsnippet
-
-snippet // "comment"
-/*$1*/
 endsnippet
 
 snippet . "class style" b
@@ -30,7 +43,7 @@ snippet # "id style" b
 }
 endsnippet
 
-snippet googleIcons "create layout for google material icons"
+snippet gi "create layout for google material icons"
 .material-icons.md-18{font-size:18px;}
 .material-icons.md-24{font-size:24px;}
 .material-icons.md-36{font-size:36px;}
