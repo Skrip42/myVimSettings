@@ -19,6 +19,7 @@ set hlsearch
 set termencoding=utf8
 syntax on
 set updatetime=100
+set signcolumn=yes
 "set scl=yes
 
 "----------------------------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ set updatetime=100
 "----------------------------------------------------------------------------------------------------
 set foldenable
 set foldmethod=marker
-set foldcolumn=3
+set foldcolumn=2
 set foldlevel=5
 "set foldopen=mark,quickfix,search,tag,undo
 let php_folding=2
@@ -167,15 +168,37 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 "----------------------------------------------------------------------------------------------------
 "toggle lest status
 "----------------------------------------------------------------------------------------------------
-function! LeftStatusToggle()
-    :set invfoldenable
-    :set invnumber
-    :SignifyToggle
+let g:toggleStatus=1
+function LeftStatusToggle()
+    if g:toggleStatus == 1
+        set foldcolumn=0
+        set nonumber
+        set signcolumn=no
+        let g:toggleStatus = 0
+    else 
+        set foldcolumn=2
+        set number
+        set signcolumn=yes
+        let g:toggleStatus = 1
+    endif
 endfunction
 
-nmap <F12> :call LeftStatusToggle()<CR>
+nmap <F3> :call LeftStatusToggle()<CR>
+nmap <F2> :set invlist<CR>
 
 "----------------------------------------------------------------------------------------------------
 "signify plugin
 "----------------------------------------------------------------------------------------------------
 let g:signify_vcs_list = [ 'git', 'hg' ] 
+"----------------------------------------------------------------------------------------------------
+"airline plugin
+"----------------------------------------------------------------------------------------------------
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='minimalist'
+let g:airline#extensions#keymap#enabled = 0
+let g:airline#extensions#hunks#enabled = 0
+let g:airline#extensions#branch#enabled = 1
+let g:airline#extensions#tagbar#enabled = 0
+let b:airline_whitespace_disabled = 1
+let g:airline_section_x=''
+let g:airline_skip_empty_sections = 1
