@@ -1,50 +1,140 @@
-#php docblock snippets
-#file docblock comment
-snippet ! "phpDoc comment" b
-/**
- * ${1:`!p snip.rv = snip.fn` Doc Comment}
- *
- * PHP version ${2:7}
- * 
- * @category ${2:Class}
- * @package  $3
- * @author   ${4:Skrip <skrip42@gmail.com>}
- * @license  http://www.gnu.org/copyleft/gpl.html CNU General Public License
- * @link     ${5:http://github.com/Skrip42}
- */
+global !p
+import os
+def readconf():
+	conf = dict(phpversion='7', package = '', author = '', license = '', link = '')
+	pwd = os.getcwd()
+	if os.path.isfile(pwd + '/.usrc') != True:
+		return dict()
+	conff = open(pwd + '/.usrc', 'r')
+	data = conff.read().split('\n')
+	for i in range(0, len(data)):
+		if data[i] != '':
+			row = data[i].split(':')
+			conf[row[0]] = row[1]
+	return conf
+
+config = readconf();	
+endglobal
+
+global !p
+def complete(t, opts):
+	if t:
+		opts = [ m[len(t):] for m in opts if m.startswith(t) ]
+	if len(opts) == 1:
+		return opts[0]
+	return "(" + '|'.join(opts) + ')'
+endglobal
+
+global !p
+def filedoc(snip):
+	body =  '/**\n'
+	body += ' * ${1:`!p snip.rv = snip.fn` dockblock}\n'
+	body += ' * \n'
+	body += ' * PHP version ' + config['phpversion'] + '\n'
+	body += ' * \n'
+	body += ' * @category ${2:Class}'
+	body += '`!p\n'
+	body += "opts = ['Class','Interface','Trait','Function']\n"
+	body += 'if t[2]:\n'
+	body += '  opts = [ m[len(t[2]):] for m in opts if m.startswith(t[2]) ]\n'
+	body += 'if len(opts) == 1:\n'
+	body += '  snip.rv = opts[0]\n'
+	body += 'else:\n'
+	body += '  snip.rv = "(" + "|".join(opts) + ")"\n'
+	body += '`\n'
+	if config['package'] == 'true':
+		body += ' * @package  $3\n'
+	if config['author']:
+		body += ' * @author   ' + config['author'] + '\n'
+	if config['license']:
+		body += ' * @license  ' + config['license'] + '\n'
+	if config['link']:
+		body += ' * @link     ' + config['link'] + '\n'
+	body += ' */\n'
+	snip.expand_anon(body)
+endglobal
+
+post_jump "filedoc(snip)"
+snippet ! "dockblock file" b
 endsnippet
 
-snippet '^(\s*)(function\s(\w+)\(([\w\s$,]*)\)\s?{?)' "function comment" r
-`!p snip.rv = match.group(1)`/**
-`!p snip.rv = match.group(1)` * ${1:`!p snip.rv = match.group(3)` function}
-`!p snip.rv = match.group(1)` *
-`!p
+global !p
 import re
-params = match.group(4).split(',')
-pType = []
-pName = []
-mTLen = 0
-mNLen = 0
-for i in range(0, len(params)):
-	#snip.rv += params[i] 
-	p = re.match('\s*(\w*)\s(\$\w*),?', params[i])
-	t = p.group(1)
-	pType.append(p.group(1))
-	pName.append(p.group(2))
-	if mTLen < len(p.group(1)):
-		mTLen = len(p.group(1))
-	if mNLen < len(p.group(2)):
-		mNLen = len(p.group(2))
-	#snip.rv += len(p.group(1))
-mTLen = mTLen + 1
-for i in range(0, len(pType)):
-	snip.rv += match.group(1) + ' * ' + '@param ' + pType[i] + ' ' * (mTLen - len(pType[i])) + pName[i] + ' ' * (mNLen - len(pName[i])) + ' description'
-	if i != len(pType) - 1:
-		snip.rv += "\n"
-		#snip.rv += "\n"
-` 
-`!p snip.rv = match.group(1)` *
-`!p snip.rv = match.group(1)` * @return ${20:null}
-`!p snip.rv = match.group(1)` */
-`!p snip.rv += match.group(2)`
+def prepareParam(param):
+	pp = dict(ptype='mixed', pname='', pdefault='', multiply='')
+	match = re.match('^\s*(?:(\w+)\s+)?(\.\.\.)?\$(\w+)\s*(?:=\s*(.*))?', param)
+	if match.group(2):
+		pp['multiply'] = match.group(2)
+	pp['pname'] = match.group(3)
+	if match.group(4):
+		de = match.group(4)
+		pp['pdefault'] = de
+		if re.match('\s*(?:true|false)\s*', de):
+			pp['ptype'] = 'bool'
+		elif re.match('\s*null\*', de):
+			pp['ptype'] = 'mixed'
+		elif re.match('\s*\[\.*\]\s*', de):
+			pp['ptype'] = 'array'
+		elif re.match('\s*\\\'.*\\\'\s*', de):
+			pp['ptype'] = 'string'
+		elif re.match('\s*".*"\s*', de):
+			pp['ptype'] = 'string'
+		elif re.match('\s*\d+\s*', de):
+			pp['ptype'] = 'int'
+	if match.group(1):
+		pp['ptype'] = match.group(1)
+	return pp
+
+def functiondoc(snip):
+	sp = snip.context['spaces']
+	tpos = 1
+	body  = sp + '/**\n'
+	body += sp + ' * ${' + str(tpos) + ':function ' + snip.context['name'] + '}\n'
+	tpos += 1
+	if snip.context['params']:
+		body += sp + ' *\n'
+		params = snip.context['params'].split(',')
+		plist = []
+		psp = dict(mtype = 0, mname = 0)
+		for i in range(0, len(params)):
+			pp = prepareParam(params[i])
+			if len(pp['ptype']) > psp['mtype']:
+				psp['mtype'] = len(pp['ptype'])
+			if len(pp['pname']) + len(pp['multiply']) > psp['mname']:
+				psp['mname'] = len(pp['pname']) + len(pp['multiply'])
+			plist.append(pp)
+		for i in range(0, len(plist)):
+			body += sp + ' * @param ' + plist[i]['ptype'].ljust(psp['mtype'], ' ') + ' ' 
+			if plist[i]['multiply']:
+				body += plist[i]['multiply']
+			body += plist[i]['pname'].ljust(psp['mname'], ' ') + ' $' + str(tpos) +'\n'
+			tpos += 1
+	body += sp + ' *\n'
+	body += sp + ' * @return '
+	if not snip.context['return']:
+		body += '${' + str(tpos) + ':null}\n'
+	elif snip.context['nullavalabe']:
+		body += snip.context['return'] + '|null\n'
+	else: 
+		body += snip.context['return'] + '\n'
+	body += sp + ' */\n'
+	body += snip.context['fullstring']
+	snip.expand_anon(body)
+endglobal
+
+context "{'fullstring':'', 'spaces':'', 'name':'', 'params':'', 'nullavalabe':'', 'return':''}"
+post_jump "functiondoc(snip)"
+snippet '^((\s*)[\w\s]*?function\s+([\w\d]+)\s*\(([^\)]*)\)\s*(?:\:\s*(\?)?\s*(\w+))?\s*\{?\s*)$' "docblock function" r
+`!p 
+snip.context['fullstring'] = match.group(1)
+snip.context['spaces'] = match.group(2)
+snip.context['name'] = match.group(3)
+snip.context['params'] = match.group(4)
+snip.context['nullavalabe'] = match.group(5)
+snip.context['return'] = match.group(6)
+`
 endsnippet
+
+
+
+

@@ -120,7 +120,7 @@ nmap <F9> : TagbarToggle<CR>
 "NERDTree plugin
 "----------------------------------------------------------------------------------------------------
 nmap <F8> :NERDTreeToggle<CR>
-autocmd vimenter *.php NERDTree
+"autocmd vimenter *.php NERDTree
 let NERDTreeShowHidden = 1
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeQuitOnOpen=1   "uncoment this for enable close on open
@@ -139,6 +139,8 @@ let g:syntastic_check_on_wq = 1
 "let g:syntastic_mode_map = {'mode':'passive'}
 
 let g:syntastic_php_phpcs_args='--tab-width=0'
+let g:syntastic_php_checkers = ['php', 'phpcs'] "uncoment this to disable phpcs and phpmb
+let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 "let g:syntastic_php_checkers = ['php'] "uncoment this to disable phpcs and phpmb
 
 nnoremap <silent> <C-d> :lclose<CR>:bdelete<CR>

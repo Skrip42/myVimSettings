@@ -1,1 +1,0 @@
-ultisnips/ftdetect/snippets.vim
