@@ -1,7 +1,7 @@
 global !p
 import os
 def readconf():
-	conf = dict(phpversion='7', package = '', author = '', license = '', link = '')
+	conf = dict(phpversion='7', package = '', author = '', license = '', link = '', functiondesc = 'false', functionparamdesc = 'false')
 	pwd = os.getcwd()
 	if os.path.isfile(pwd + '/.usrc') != True:
 		return dict()
@@ -29,9 +29,9 @@ global !p
 def filedoc(snip):
 	body =  '/**\n'
 	body += ' * ${1:`!p snip.rv = snip.fn` dockblock}\n'
-	body += ' * \n'
+	body += ' *\n'
 	body += ' * PHP version ' + config['phpversion'] + '\n'
-	body += ' * \n'
+	body += ' *\n'
 	body += ' * @category ${2:Class}'
 	body += '`!p\n'
 	body += "opts = ['Class','Interface','Trait','Function']\n"
@@ -60,14 +60,21 @@ endsnippet
 
 global !p
 import re
+def prepareName(name):
+	parts = re.findall('.[^A-Z]*', name)
+	result = ' '.join(parts)
+	return result.lower()
+
 def prepareParam(param):
 	pp = dict(ptype='mixed', pname='', pdefault='', multiply='')
-	match = re.match('^\s*(?:(\w+)\s+)?(\.\.\.)?\$(\w+)\s*(?:=\s*(.*))?', param)
-	if match.group(2):
-		pp['multiply'] = match.group(2)
-	pp['pname'] = match.group(3)
+	match = re.match('^\s*(\?)?\s*(?:([\\\\\d\w]+)\s+)?(\.\.\.)?(&)?\$([\d\w]+)\s*(?:=\s*(.*))?', param)
+	if match.group(3):
+		pp['multiply'] = match.group(3)
+	pp['pname'] = '$' + match.group(5)
 	if match.group(4):
-		de = match.group(4)
+		pp['pname'] = '&' + pp['pname']
+	if match.group(6):
+		de = match.group(6)
 		pp['pdefault'] = de
 		if re.match('\s*(?:true|false)\s*', de):
 			pp['ptype'] = 'bool'
@@ -81,18 +88,22 @@ def prepareParam(param):
 			pp['ptype'] = 'string'
 		elif re.match('\s*\d+\s*', de):
 			pp['ptype'] = 'int'
-	if match.group(1):
-		pp['ptype'] = match.group(1)
+	if match.group(2):
+		pp['ptype'] = match.group(2)
+		if match.group(1):
+			pp['ptype'] += '|null'
 	return pp
 
 def functiondoc(snip):
 	sp = snip.context['spaces']
 	tpos = 1
 	body  = sp + '/**\n'
-	body += sp + ' * ${' + str(tpos) + ':function ' + snip.context['name'] + '}\n'
-	tpos += 1
+	if config['functiondesc'] == 'true':
+		body += sp + ' * ${' + str(tpos) + ':' + prepareName(snip.context['name']) + '}\n'
+		tpos += 1
 	if snip.context['params']:
-		body += sp + ' *\n'
+		if config['functiondesc'] == 'true':
+			body += sp + ' *\n'
 		params = snip.context['params'].split(',')
 		plist = []
 		psp = dict(mtype = 0, mname = 0)
@@ -107,15 +118,19 @@ def functiondoc(snip):
 			body += sp + ' * @param ' + plist[i]['ptype'].ljust(psp['mtype'], ' ') + ' ' 
 			if plist[i]['multiply']:
 				body += plist[i]['multiply']
-			body += plist[i]['pname'].ljust(psp['mname'], ' ') + ' $' + str(tpos) +'\n'
-			tpos += 1
+			if config['functionparamdesc'] == 'true':
+				body += plist[i]['pname'].ljust(psp['mname'], ' ') + ' $' + str(tpos)
+				tpos += 1
+			else : 
+				body += plist[i]['pname']
+			body += '\n'
 	body += sp + ' *\n'
 	body += sp + ' * @return '
 	if not snip.context['return']:
 		body += '${' + str(tpos) + ':null}\n'
 	elif snip.context['nullavalabe']:
 		body += snip.context['return'] + '|null\n'
-	else: 
+	else : 
 		body += snip.context['return'] + '\n'
 	body += sp + ' */\n'
 	body += snip.context['fullstring']
@@ -124,7 +139,7 @@ endglobal
 
 context "{'fullstring':'', 'spaces':'', 'name':'', 'params':'', 'nullavalabe':'', 'return':''}"
 post_jump "functiondoc(snip)"
-snippet '^((\s*)[\w\s]*?function\s+([\w\d]+)\s*\(([^\)]*)\)\s*(?:\:\s*(\?)?\s*(\w+))?\s*\{?\s*)$' "docblock function" r
+snippet '^((\s*)[\w\s]*?function\s+([\w\d]+)\s*\(([^\)]*)\)\s*(?:\:\s*(\?)?\s*([\\\w\d]+))?\s*[\{;]?\s*)$' "docblock function" r
 `!p 
 snip.context['fullstring'] = match.group(1)
 snip.context['spaces'] = match.group(2)

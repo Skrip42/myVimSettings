@@ -100,6 +100,7 @@ syn match   sqlFunction     "\<\(range\|replace\|root\|round\|rpad\|sin\|soundex
 syn match   sqlFunction     "\<\(sqrtstdev\|strftime\|substr\|substring\|sum\|sysdate\|tan\)(\@="
 syn match   sqlFunction     "\<\(to_char\|to_date\|to_number\|total\|trim\|trunc\|typeof\)(\@="
 syn match   sqlFunction     "\<\(upper\|variance\)(\@="
+syn match   sqlFunction     "\<\(day\|month\|year\|current_date\|date_add\|last_day\)(\@="
 
 " Oracle DBMS functions.
 syn match   sqlFunction     "\<dbms_\w\+\.\w\+(\@="

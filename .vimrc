@@ -72,7 +72,7 @@ filetype plugin indent on
 "ultisnips
 "----------------------------------------------------------------------------------------------------
 let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<c-j>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
 set runtimepath+=~/.vim/UltiSnips
 let g:UltiSnipaSnippetDirectories=["~/.vim/UltiSnips"]
@@ -204,3 +204,10 @@ let g:airline#extensions#tagbar#enabled = 0
 let b:airline_whitespace_disabled = 1
 let g:airline_section_x=''
 let g:airline_skip_empty_sections = 1
+"----------------------------------------------------------------------------------------------------
+"gist plugin
+"----------------------------------------------------------------------------------------------------
+let g:gist_open_browser_after_post = 1
+let g:gist_browser_command = 'google-chrome %URL%'
+let g:github_user = 'Skrip42'
+let g:github_token = '29f03ed2bce2cdfffa1eef805588264fdbe0d6c3'

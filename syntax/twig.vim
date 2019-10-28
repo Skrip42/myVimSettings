@@ -1,35 +1,13 @@
+" vim: set noexpandtab:
 " Vim syntax file
-" Language:	Twig template
-" Maintainer:	Gabriel Gosselin <gabrielNOSPAM@evidens.ca>
-" Last Change:	2014 December 15
-" Version:	1.1
-"
-" Based Jinja syntax by:	Armin Ronacher <armin.ronacher@active-4.com>
-" With modifications by Benji Fisher, Ph.D.
-"
-" Known Bugs:
-"   because of odd limitations dicts and the modulo operator
-"   appear wrong in the template.
-"
-" Changes:
-"
-"     2008 May 9:     Added support for Jinja2 changes (new keyword rules)
-"     2011 July 27:   Changed all references of jinja tp twig
-"     2014 December 4:   Do not assume that the base filetype is HTML.
-
-if exists('b:main_syntax')
-  finish
-endif
-if exists('b:current_syntax')
-  let b:main_syntax = b:current_syntax
-else
-  let b:main_syntax = 'twig'
-endif
+" Language:        Twig
+" Maintainer:      Nelson Yeung
+" URL:             https://github.com/nelsyeung/twig.vim
+" Acknowledgement: Based on evidens/vim-twig
 
 syntax case match
 
-" Twig template built-in tags and parameters (without filter, macro, is and
-" raw, they have special treatment)
+" Twig template built-in tags and parameters (without filter, macro, is and raw, they have special treatment)
 syn keyword twigStatement containedin=twigVarBlock,twigTagBlock,twigNested contained and if else in not or recursive as import
 
 syn keyword twigStatement containedin=twigVarBlock,twigTagBlock,twigNested contained is filter skipwhite nextgroup=twigFilter
@@ -79,39 +57,38 @@ syn match twigStatement containedin=twigTagBlock contained skipwhite /\({%-\?\s*
 " and context modifiers
 syn match twigStatement containedin=twigTagBlock contained /\<with\(out\)\?\s\+context\>/ skipwhite
 
-
 " Define the default highlighting.
 " For version 5.7 and earlier: only when not done already
 " For version 5.8 and later: only when an item doesn't have highlighting yet
 if version >= 508 || !exists("did_twig_syn_inits")
-  if version < 508
-    let did_twig_syn_inits = 1
-    command -nargs=+ HiLink hi link <args>
-  else
-    command -nargs=+ HiLink hi def link <args>
-  endif
+	if version < 508
+		let did_twig_syn_inits = 1
+		command -nargs=+ HiLink hi link <args>
+	else
+		command -nargs=+ HiLink hi def link <args>
+	endif
 
-  HiLink twigPunctuation twigOperator
-  HiLink twigAttribute twigVariable
-  HiLink twigFunction twigFilter
+	HiLink twigPunctuation twigOperator
+	HiLink twigAttribute twigVariable
+	HiLink twigFunction twigFilter
 
-  HiLink twigTagDelim twigTagBlock
-  HiLink twigVarDelim twigVarBlock
-  HiLink twigCommentDelim twigComment
-  HiLink twigRawDelim twig
+	HiLink twigTagDelim twigTagBlock
+	HiLink twigVarDelim twigVarBlock
+	HiLink twigCommentDelim twigComment
+	HiLink twigRawDelim twig
 
-  HiLink twigSpecial Special
-  HiLink twigOperator Normal
-  HiLink twigRaw Normal
-  HiLink twigTagBlock PreProc
-  HiLink twigVarBlock PreProc
-  HiLink twigStatement Statement
-  HiLink twigFilter Function
-  HiLink twigBlockName Function
-  HiLink twigVariable Identifier
-  HiLink twigString Constant
-  HiLink twigNumber Constant
-  HiLink twigComment Comment
+	HiLink twigSpecial Special
+	HiLink twigOperator Normal
+	HiLink twigRaw Normal
+	HiLink twigTagBlock PreProc
+	HiLink twigVarBlock PreProc
+	HiLink twigStatement Statement
+	HiLink twigFilter Function
+	HiLink twigBlockName Function
+	HiLink twigVariable Identifier
+	HiLink twigString Constant
+	HiLink twigNumber Constant
+	HiLink twigComment Comment
 
-  delcommand HiLink
+	delcommand HiLink
 endif
