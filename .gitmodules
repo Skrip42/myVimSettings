@@ -46,3 +46,45 @@
 [submodule "bundle/webapi-vim"]
 	path = bundle/webapi-vim
 	url = https://github.com/mattn/webapi-vim.git
+[submodule "bundle/vim-hug-neovim-rpc"]
+	path = bundle/vim-hug-neovim-rpc
+	url = https://github.com/roxma/vim-hug-neovim-rpc.git
+[submodule "bundle/nvim-yarp"]
+	path = bundle/nvim-yarp
+	url = https://github.com/roxma/nvim-yarp.git
+[submodule "bundle/deoplete.nvim"]
+	path = bundle/deoplete.nvim
+	url = https://github.com/Shougo/deoplete.nvim.git
+[submodule "bundle/deoplete-padawan"]
+	path = bundle/deoplete-padawan
+	url = https://github.com/padawan-php/deoplete-padawan.git
+[submodule "bundle/deoplete-phpactor"]
+	path = bundle/deoplete-phpactor
+	url = https://github.com/kristijanhusak/deoplete-phpactor.git
+[submodule "bundle/phpactor"]
+	path = bundle/phpactor
+	url = https://github.com/phpactor/phpactor.git
+[submodule "bundle/autocomplete-flow"]
+	path = bundle/autocomplete-flow
+	url = https://github.com/wokalski/autocomplete-flow.git
+[submodule "bundle/deoplete-ternjs"]
+	path = bundle/deoplete-ternjs
+	url = https://github.com/carlitux/deoplete-ternjs.git
+[submodule "bundle/deoplete-clangx"]
+	path = bundle/deoplete-clangx
+	url = https://github.com/Shougo/deoplete-clangx.git
+[submodule "bundle/tern_for_vim"]
+	path = bundle/tern_for_vim
+	url = https://github.com/ternjs/tern_for_vim.git
+[submodule "bundle/deoplete-jedi"]
+	path = bundle/deoplete-jedi
+	url = https://github.com/deoplete-plugins/deoplete-jedi.git
+[submodule "bundle/neco-syntax"]
+	path = bundle/neco-syntax
+	url = https://github.com/Shougo/neco-syntax.git
+[submodule "bundle/deoplete-zsh"]
+	path = bundle/deoplete-zsh
+	url = https://github.com/deoplete-plugins/deoplete-zsh.git
+[submodule "bundle/neco-vim"]
+	path = bundle/neco-vim
+	url = https://github.com/Shougo/neco-vim.git

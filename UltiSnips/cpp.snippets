@@ -1,0 +1,12 @@
+snippet ! "cpp test" b
+#ifndef ${2:`!v substitute(vim_snippets#Filename('$1_H','ClassName'),'.*','\U&\E','')`}
+#define $2
+
+namespace $3
+{
+	$4
+}
+
+#endif /* $2 */
+endsnippet
+

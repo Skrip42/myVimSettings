@@ -66,7 +66,6 @@ set backupdir=~/.vimbackup
 set directory=~/.vimswap
 set undodir=~/.vimundo
 
- Source a global configuration file if available
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
@@ -160,6 +159,7 @@ cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdele
 "set signcolumn=no
 "open the syntastic bar
 nmap <F10> :lopen<CR> 
+nmap <C-i> :lnext<CR>
 
 "----------------------------------------------------------------------------------------------------
 "nerd commenter plugin
@@ -173,11 +173,27 @@ nmap <C-p> :bprev<CR>
 "----------------------------------------------------------------------------------------------------
 "YouCompleteMe plugin
 "----------------------------------------------------------------------------------------------------
-let g:ycm_use_clangd = 0
-let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
-let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
-let g:SuperTabDefaultCompletionType = '<C-n>'
-set completeopt-=preview
+"let g:ycm_use_clangd = 0
+"let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+"let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+"let g:SuperTabDefaultCompletionType = '<C-n>'
+"set completeopt-=preview
+
+"----------------------------------------------------------------------------------------------------
+"deoplete
+"----------------------------------------------------------------------------------------------------
+let g:deoplete#enable_at_startup = 1
+
+"phpactor
+let g:deoplete#sources = {}
+let g:deoplete#sources.php = ['omni', 'phpactor', 'ultisnips', 'buffer']
+
+"ternjs
+"let g:tern#command = ["tern"]
+"let g:tern#arguments = ["--persistent"]
+"let g:deoplete#sources#ternjs#types = 1
+let g:deoplete#sources#ternjs#tern_bin = '/usr/local/bin/tern'
+let g:deoplete#sources#ternjs#timeout = 1
 
 "----------------------------------------------------------------------------------------------------
 "toggle lest status
