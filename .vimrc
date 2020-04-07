@@ -27,6 +27,9 @@ set updatetime=100
 set signcolumn=yes
 "set scl=yes
 set mouse=a
+set wildmenu
+set wildmode=full
+set history=200
 
 "----------------------------------------------------------------------------------------------------
 "clipboard  //recompile vim with x11 to enabled this!
@@ -38,9 +41,9 @@ set clipboard=unnamedplus
 "----------------------------------------------------------------------------------------------------
 set foldenable
 set foldmethod=marker
-set foldcolumn=2
+set foldcolumn=0
 set foldlevel=5
-"set foldopen=mark,quickfix,search,tag,undo
+set foldopen=mark,quickfix,search,tag,undo
 let php_folding=2
 
 autocmd InsertEnter * let w:last_fdm=&foldmethod | setlocal foldmethod=manual
@@ -69,6 +72,11 @@ set undodir=~/.vimundo
 if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
+
+"----------------------------------------------------------------------------------------------------
+"custom commands
+"----------------------------------------------------------------------------------------------------
+let mapleader="\"
 
 "----------------------------------------------------------------------------------------------------
 "pathogen
@@ -129,11 +137,18 @@ nmap <F9> : TagbarToggle<CR>
 "----------------------------------------------------------------------------------------------------
 "NERDTree plugin
 "----------------------------------------------------------------------------------------------------
-nmap <F8> :NERDTreeToggle<CR>
+"nmap <F8> :NERDTreeToggle<CR>
 "autocmd vimenter *.php NERDTree
-let NERDTreeShowHidden = 1
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-let NERDTreeQuitOnOpen=1   "uncoment this for enable close on open
+"let NERDTreeShowHidden = 1
+"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+"let NERDTreeQuitOnOpen=1   "uncoment this for enable close on open
+
+"nmap <F8> :e . <CR>
+"nmap <F7> :vsp . <CR>
+
+noremap <Leader>e :e . <CR>
+noremap <Leader>v :vsp . <CR>
+noremap <Leader>s :sp . <CR>
 
 "----------------------------------------------------------------------------------------------------
 "syntastic plugin
@@ -159,7 +174,6 @@ cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdele
 "set signcolumn=no
 "open the syntastic bar
 nmap <F10> :lopen<CR> 
-nmap <C-i> :lnext<CR>
 
 "----------------------------------------------------------------------------------------------------
 "nerd commenter plugin
@@ -199,14 +213,15 @@ let g:deoplete#sources#ternjs#timeout = 1
 "toggle lest status
 "----------------------------------------------------------------------------------------------------
 let g:toggleStatus=1
+set listchars=tab:▸\ ,eol:¬
 function LeftStatusToggle()
     if g:toggleStatus == 1
-        set foldcolumn=0
+        "set foldcolumn=0
         set nonumber
         set signcolumn=no
         let g:toggleStatus = 0
     else 
-        set foldcolumn=2
+        "set foldcolumn=2
         set number
         set signcolumn=yes
         let g:toggleStatus = 1
@@ -215,6 +230,15 @@ endfunction
 
 nmap <F3> :call LeftStatusToggle()<CR>
 nmap <F2> :set invlist<CR>
+
+"----------------------------------------------------------------------------------------------------
+"markology plugin
+"----------------------------------------------------------------------------------------------------
+"let g:markology_enable = 0
+nmap <F4> :MarkologyToggle<CR>
+
+
+nmap <F5> :SRegisterToggle<CR>
 
 "----------------------------------------------------------------------------------------------------
 "signify plugin

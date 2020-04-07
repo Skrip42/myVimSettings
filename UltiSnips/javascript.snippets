@@ -16,11 +16,11 @@ document.addEventListener("DOMContentLoaded", function () {
 endsnippet
 
 snippet # "getElementById" i
-document.getElementById('$1')$2;
+document.getElementById('$1')${2:;}
 endsnippet
 
 snippet . "getElementsByClass" i
-document.getElementsByClassName('$1')$2;
+document.getElementsByClassName('$1')${2:;}
 endsnippet
 
 snippet class "classList" i
@@ -40,16 +40,46 @@ addEventListener('$1', ${2:function (event) {$3}})$4
 endsnippet
 
 snippet proto "setPrototype" i
-Object.setPrototypeOf(${1:this}, $2);
+Object.setPrototypeOf(${1:this}, $2)${3:;}
 endsnippet
 
 snippet attr "setAttribute" i
-setAttribute("$1","$2");
+setAttribute("$1","$2")${3:;}
 endsnippet
 
 snippet attr "getAttribute" i
-getAttribute("$1");
+getAttribute("$1")${2:;}
 endsnippet
+
+snippet div "create div element" i
+document.createElement('div')${1:;}
+endsnippet
+
+snippet p "create p element" i 
+document.createElement('p')${1:;}
+endsnippet
+
+snippet li "create li element" i
+document.createElement('li')${1:;}
+endsnippet
+
+snippet ul "create ul element" i
+document.createElement('us')${1:;}
+endsnippet
+
+snippet input "create input element" i
+document.createElement('input').setAttribute('type', "$1`!p 
+snip.rv=complete(t[1], [
+	'text', 'number', 'checkbox', 'radio', 'hidden', 'file', 'image', 'button', 'date', 'password',
+	'color', 'date', 'datetime-local', 'email', 'month', 'range', 'reset', 'search', 'submit', 'tel', 'time', 'url', 'week'
+])
+`")${2:;}
+endsnippet
+
+snippet svg "create svg element" i
+document.createElementNS("http://www.w3.org/2000/svg", $1`!p snip.rv=complete(t[1], ['g', 'path', 'rect', 'circle', 'text'])`)${2:;}
+endsnippet
+
 
 snippet "(^(\s*)(var|)\s*)(this.|)([.\w]+) (=|:)\s*" "object" r
 `!p

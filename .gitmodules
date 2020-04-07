@@ -88,3 +88,21 @@
 [submodule "bundle/neco-vim"]
 	path = bundle/neco-vim
 	url = https://github.com/Shougo/neco-vim.git
+[submodule "bundle/vim-markology"]
+	path = bundle/vim-markology
+	url = https://github.com/jeetsukumaran/vim-markology.git
+[submodule "bundle/vim-surround"]
+	path = bundle/vim-surround
+	url = https://github.com/tpope/vim-surround.git
+[submodule "bundle/vim-repeat"]
+	path = bundle/vim-repeat
+	url = https://github.com/tpope/vim-repeat.git
+[submodule "bundle/sRegister"]
+	path = bundle/sRegister
+	url = https://github.com/Skrip42/sRegister.git
+[submodule "bundle/vim-dadbod"]
+	path = bundle/vim-dadbod
+	url = https://github.com/tpope/vim-dadbod.git
+[submodule "bundle/vim-dadbod-ui"]
+	path = bundle/vim-dadbod-ui
+	url = https://github.com/kristijanhusak/vim-dadbod-ui.git

@@ -18,7 +18,7 @@ hi Normal guifg=#e5e5e5 ctermfg=253 guibg=#262626 gui=NONE cterm=NONE
 " Misc {{{1
 hi Boolean        guifg=#af97df ctermfg=98  ctermbg=NONE gui=NONE guibg=bg cterm=NONE
 hi Character      guifg=#9d7ff2 ctermfg=141 ctermbg=NONE gui=NONE guibg=bg cterm=NONE
-hi Comment        guifg=#585858 ctermfg=240 ctermbg=NONE gui=NONE cterm=NONE
+hi Comment        guifg=#585858 ctermfg=240 ctermbg=NONE gui=NONE cterm=italic
 hi Conditional    guifg=#F6DA7B ctermfg=222 ctermbg=NONE gui=NONE guibg=bg cterm=NONE
 hi Constant       guifg=#87dfdf ctermfg=116 ctermbg=NONE gui=NONE cterm=NONE
 hi Cursor         guifg=#eeeeee ctermfg=15  ctermbg=247  gui=NONE guibg=#8DA1A1
@@ -95,7 +95,9 @@ hi Folded     ctermfg=102 ctermbg=237 cterm=NONE guifg=#878787 guibg=#3a3a3a gui
 
 " Search {{{1
 hi IncSearch guifg=#c0c0c0 ctermfg=7 guibg=#005fff ctermbg=27  gui=NONE cterm=NONE
-hi Search    guifg=#c0c0c0 ctermfg=7 guibg=#df005f ctermbg=161 gui=NONE cterm=NONE
+hi Search    guifg=#e5e5e5 ctermfg=7 guibg=#484848 ctermbg=161 gui=NONE cterm=NONE
+"hi IncSearch guifg=#c0c0c0 ctermfg=7 guibg=#005fff ctermbg=27  gui=NONE cterm=NONE
+"hi Search    guifg=#c0c0c0 ctermfg=7 guibg=#df005f ctermbg=161 gui=NONE cterm=NONE
 
 " Messages {{{1
 hi Error      guifg=#eeeeee ctermfg=255 guibg=#df005f ctermbg=161  gui=NONE cterm=NONE
@@ -145,6 +147,17 @@ hi StartifySection guifg=#dfafaf ctermfg=181 ctermbg=NONE gui=NONE cterm=NONE
 hi StartifySelect  guifg=#5fdfff ctermfg=81  ctermbg=NONE gui=NONE cterm=NONE
 hi StartifySlash   guifg=#585858 ctermfg=240 ctermbg=NONE gui=NONE cterm=NONE
 hi StartifySpecial guifg=#585858 ctermfg=240 ctermbg=NONE gui=NONE cterm=NONE
+
+" Plugin: markology {{{1
+hi MarkologyHLl ctermfg=green ctermbg=black cterm=bold guifg=#808080 guibg=#3a3a3a
+hi MarkologyHLLine cterm=underline gui=undercurl guisp=#007777
+hi MarkologyHLu ctermfg=green ctermbg=black cterm=bold guifg=#808080 guibg=#3a3a3a
+hi MarkologyHLo ctermfg=green ctermbg=black cterm=bold guifg=#808080 guibg=#3a3a3a
+hi MarkologyHLm ctermfg=green ctermbg=black cterm=bold guifg=#808080 guibg=#3a3a3a
+"hi SignColumn ctermfg=NONE guibg=#3a3a3a ctermbg=237 gui=NONE cterm=NONE
+"hi TabLine     guifg=#808080 ctermfg=244 guibg=#303030 ctermbg=236 gui=NONE cterm=NONE
+"hi TabLineFill guifg=#dfdfaf ctermfg=187 guibg=#303030 ctermbg=236 gui=NONE cterm=NONE
+"hi TabLineSel  guifg=#e4e4e4 ctermfg=254 guibg=#303030 ctermbg=236 gui=bold cterm=bold
 
 " Neovim {{{1
 if has('nvim')
