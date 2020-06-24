@@ -74,6 +74,10 @@ if filereadable("/etc/vim/vimrc.local")
 endif
 
 "----------------------------------------------------------------------------------------------------
+"fix quickfix embrasure
+"----------------------------------------------------------------------------------------------------
+au FileType qf 30 wincmd _
+"----------------------------------------------------------------------------------------------------
 "custom commands
 "----------------------------------------------------------------------------------------------------
 let mapleader="\"
@@ -85,15 +89,6 @@ filetype off
 call pathogen#helptags()
 execute pathogen#infect('~/.vim/bundle/{}')
 filetype plugin indent on
-
-"----------------------------------------------------------------------------------------------------
-"ultisnips
-"----------------------------------------------------------------------------------------------------
-let g:UltiSnipsExpandTrigger = "<tab>"
-let g:UltiSnipsJumpForwardTrigger = "<c-j>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-set runtimepath+=~/.vim/UltiSnips
-let g:UltiSnipaSnippetDirectories=["~/.vim/UltiSnips"]
 
 "----------------------------------------------------------------------------------------------------
 "autosave worckflow
@@ -123,6 +118,20 @@ highlight lCursor ctermfg=cyan
 "----------------------------------------------------------------------------------------------------
 set termguicolors
 colorscheme angr
+
+"----------------------------------------------------------------------------------------------------
+"remove trailing whitespace
+"----------------------------------------------------------------------------------------------------
+autocmd BufWritePre * %s/\s\+$//e
+
+"----------------------------------------------------------------------------------------------------
+"ultisnips
+"----------------------------------------------------------------------------------------------------
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<c-j>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+set runtimepath+=~/.vim/UltiSnips
+let g:UltiSnipaSnippetDirectories=["~/.vim/UltiSnips"]
 
 "----------------------------------------------------------------------------------------------------
 "changes plugin
@@ -173,7 +182,7 @@ cabbrev <silent> bd <C-r>=(getcmdtype()==#':' && getcmdpos()==1 ? 'lclose\|bdele
 
 "set signcolumn=no
 "open the syntastic bar
-nmap <F10> :lopen<CR> 
+nmap <F10> :lopen<CR>
 
 "----------------------------------------------------------------------------------------------------
 "nerd commenter plugin
@@ -220,7 +229,7 @@ function LeftStatusToggle()
         set nonumber
         set signcolumn=no
         let g:toggleStatus = 0
-    else 
+    else
         "set foldcolumn=2
         set number
         set signcolumn=yes
@@ -243,7 +252,7 @@ nmap <F5> :SRegisterToggle<CR>
 "----------------------------------------------------------------------------------------------------
 "signify plugin
 "----------------------------------------------------------------------------------------------------
-let g:signify_vcs_list = [ 'git', 'hg' ] 
+let g:signify_vcs_list = [ 'git', 'hg' ]
 "----------------------------------------------------------------------------------------------------
 "airline plugin
 "----------------------------------------------------------------------------------------------------
@@ -256,6 +265,18 @@ let g:airline#extensions#tagbar#enabled = 0
 let b:airline_whitespace_disabled = 1
 let g:airline_section_x=''
 let g:airline_skip_empty_sections = 1
+"----------------------------------------------------------------------------------------------------
+"ack.vim plugin
+"----------------------------------------------------------------------------------------------------
+let g:ackprg = 'ag --column'
+cnoreabbrev Ack Ack !
+noremap <Leader>a :Ack! <Space>
+noremap <Leader>f :AckFile! <Space>
+let g:ackhighlight=1
+"let g:ack_autofold_results=1
+"let g:ack_qhandler="botright copen 30"
+"let g:ackpreview=1
+"let g:ack_autoclose = 1
 "----------------------------------------------------------------------------------------------------
 "gist plugin
 "----------------------------------------------------------------------------------------------------
